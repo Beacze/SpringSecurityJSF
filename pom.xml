@@ -13,13 +13,8 @@
   </properties>
 
   <url>http://maven.apache.org</url>
+
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>
@@ -36,13 +31,16 @@
       <artifactId>jsf-impl</artifactId>
       <version>2.1.13</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>2.6.2</version>
+    </dependency>
     <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>6.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
@@ -63,7 +61,15 @@
       <artifactId>spring-security-taglibs</artifactId>
       <version>4.2.3.RELEASE</version>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
   <build>
     <finalName>de.SpringSecTest</finalName>
     <plugins>
