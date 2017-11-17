@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <h1><h:outputText value="#{person.search.title}"/></h1>
+
+    <table class="search">
+        <tr>
+            <th><h:outputText value="#{person.form.firstName}"/></th>
+            <th><h:outputText value="#{person.form.lastName}"/></th>
+        </tr>
+        <c:forEach var="person" items="${persons}" varStatus="status">
+            <tr>
+                <c:set var="personFormId" value="person${status.index}"/>
+
+                <c:url var="editUrl" value="/person.xhtml">
+                    <c:param name="id" value="${person.id}" />
+                </c:url>
+
+                <sec:authorize ifAllGranted="ROLE_ADMIN">
+                    <c:url var="deleteUrl" value="/person/delete.xhtml"/>
+                    <form id="${personFormId}" action="${deleteUrl}" method="POST">
+                        <input id="id" name="id" type="hidden" value="${person.id}"/>
+                    </form>
+                </sec:authorize>
+
+                <td>${person.firstName}</td>
+                <td>${person.lastName}</td>
+                <td>
+                    <a href='<c:out value="${editUrl}"/>'><h:outputText value="#{button.edit}"/></a>
+                    <sec:authorize ifAllGranted="ROLE_ADMIN">
+                        <a href="javascript:document.forms['${personFormId}'].submit();"><h:outputText value="#{button.delete}"/></a>
+                    </sec:authorize>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</h:body>
+</html>

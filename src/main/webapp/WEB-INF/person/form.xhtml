@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <h1><h:outputText value="#{person.form.title}"/></h1>
+
+    <div id="messages">
+        <c:if test="${not empty statusMessageKey}">
+            <p><fmt:message key="${statusMessageKey}"/></p>
+        </c:if>
+
+        <spring:hasBindErrors name="person">
+            <h2>Errors</h2>
+            <div class="formerror">
+                <ul>
+                    <c:forEach var="error" items="${errors.allErrors}">
+                        <li>${error.defaultMessage}</li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </spring:hasBindErrors>
+    </div>
+
+    <form:form modelAttribute="person">
+        <form:hidden path="id" />
+
+        <fieldset>
+            <div class="form-row">
+                <label for="firstName"><h:outputText value="#{person.form.firstName}"/>:</label>
+                <span class="input"><form:input path="firstName" /></span>
+            </div>
+            <div class="form-row">
+                <label for="lastName"><h:outputText value="#{person.form.lastName}"/>:</label>
+                <span class="input"><form:input path="lastName" /></span>
+            </div>
+            <div class="form-buttons">
+                <div class="button">
+                    <input type="submit" id="save" name="_eventId_save" value="<fmt:message key="button.save"/>"/>&#160;
+                    <input type="submit" name="_eventId_cancel" value="<fmt:message key="button.cancel"/>"/>&#160;
+                </div>
+            </div>
+        </fieldset>
+    </form:form>
+</h:body>
+</html>

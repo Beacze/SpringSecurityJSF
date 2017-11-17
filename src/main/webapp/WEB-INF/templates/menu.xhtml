@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+</h:head>
+<h:body>
+    <div id="side-bar">
+        <a href="/">Home</a>
+
+        <sec:authorize ifAllGranted="ROLE_USER">
+            <p><h:outputText value="#{person.form.title}"/></p>
+            <a href="/person.html"><h:outputText value="#{button.create}"/></a>
+            <a href="/person/search.html"><h:outputText value="#{button.search}"/></a>
+        </sec:authorize>
+    </div>
+</h:body>
+</html>
